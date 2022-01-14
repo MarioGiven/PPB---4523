@@ -17,14 +17,14 @@ import java.util.Locale;
 class ListViewAdapterCall extends BaseAdapter {
     Context mContext;
     LayoutInflater inflater;
-    private List<ListViewAdapterMenu> viewadapterlist;
-    private ArrayList<ListViewAdapterMenu> arraylist;
+    private List<com.example.listviewmenu.ListViewAdapterMenu> viewadapterlist;
+    private ArrayList<com.example.listviewmenu.ListViewAdapterMenu> arraylist;
 
-    public ListViewAdapterCall(Context context,	List<ListViewAdapterMenu> viewadapterlist) {
+    public ListViewAdapterCall(Context context,	List<com.example.listviewmenu.ListViewAdapterMenu> viewadapterlist) {
         mContext = context;
         this.viewadapterlist = viewadapterlist;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist  = new ArrayList<ListViewAdapterMenu>();
+        this.arraylist  = new ArrayList<com.example.listviewmenu.ListViewAdapterMenu>();
         this.arraylist.addAll(viewadapterlist);
     }
 
@@ -40,7 +40,7 @@ class ListViewAdapterCall extends BaseAdapter {
     }
 
     @Override
-    public ListViewAdapterMenu getItem(int position) {
+    public com.example.listviewmenu.ListViewAdapterMenu getItem(int position) {
         return viewadapterlist.get(position);
     }
 
@@ -62,16 +62,16 @@ class ListViewAdapterCall extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.NamaPadang.setText(viewadapterlist.get(position).getNamaBurger());
-        holder.HargaPadang.setText(viewadapterlist.get(position).getHargaBurger());
+        holder.NamaPadang.setText(viewadapterlist.get(position).getNamaPadang());
+        holder.HargaPadang.setText(viewadapterlist.get(position).getHargaPadang());
         holder.Gambar.setImageResource(viewadapterlist.get(position).getGambar());
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent intent = new Intent(mContext, Menu_Detail_Makanan.class);
-                intent.putExtra("HargaPadang",(viewadapterlist.get(position).getHargaBurger()));
-                intent.putExtra("NamaPadang",	(viewadapterlist.get(position).getNamaBurger()));
+                Intent intent = new Intent(mContext, com.example.listviewmenu.Menu_Detail_Makanan.class);
+                intent.putExtra("HargaPadang",(viewadapterlist.get(position).getHargaPadang()));
+                intent.putExtra("NamaPadang",	(viewadapterlist.get(position).getNamaPadang()));
                 intent.putExtra("Deskripsi",(viewadapterlist.get(position).getDeskripsi()));
                 intent.putExtra("Gambar",	(viewadapterlist.get(position).getGambar()));
 
@@ -88,12 +88,11 @@ class ListViewAdapterCall extends BaseAdapter {
         if (charText.length() == 0) {
             viewadapterlist.addAll(arraylist);
         } else {
-            for (ListViewAdapterMenu wp : arraylist) {
-                if (wp.getNamaBurger().toLowerCase(Locale.getDefault()).contains(charText)) {
+            for (com.example.listviewmenu.ListViewAdapterMenu wp : arraylist) {
+                if (wp.getNamaPadang().toLowerCase(Locale.getDefault()).contains(charText)) {
                     viewadapterlist.add(wp);
                 }
             }
         }
         notifyDataSetChanged();
     }
-}
